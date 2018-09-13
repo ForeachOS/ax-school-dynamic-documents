@@ -18,6 +18,6 @@ server:
 
 spring:
   datasource:
-    url: "jdbc:h2:./local-data/${user.name}/demo-db"
+    url: "jdbc:h2:./local-data/demo-db"
     username: sa
 

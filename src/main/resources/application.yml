@@ -24,11 +24,5 @@ logging:
 userModule:
   require-email-unique: true
 
-spring:
-  devtools:
-    livereload:
-      enabled: false
-    restart:
-      enabled: false
 acrossWebModule:
   registerGlobalBuilderContext: true

@@ -11,6 +11,7 @@ document-definition:
     type: string
     validators:
     - required
+    - email
   - id: status
     label: Registration status
     type: string
