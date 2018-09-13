@@ -1,70 +1,61 @@
 document-definition:
-  name: training
+  name: Training
   types:
-  - id: slot
+  - id: schedule-entry
     base-type: fieldset
     fields:
-    - id: programme
+    - id: startTime
+      type: time
+    - id: endTime
+      type: time
+    - id: details
       type: text
-      validators:
-      - required
-    - id: start-time
-      label: Start time
-      type: time
-      validators:
-      - required
-    - id: end-time
-      label: End time
-      type: time
-      validators:
-      - required
-  - id: address
-    base-type: fieldset
-    fields:
-    - id: street
-      type: string
-      validators:
-      - required
-    - id: street-nr
-      type: number
-      validators:
-      - required
-    - id: zipcode
-      type: number
-      validators:
-      - required
   content:
-  - id: call-to-action
+  - id: tag-line
     label: Call to action
-    messages:
-      description: "The call to action for this demo"
     type: string
-    validators:
-    - required
   - id: date
-    label: Training date
+    label: Date of the training
     type: date
     validators:
     - required
-  - id: location
-    label: Training location
-    type: address
-    validators:
-    - required
+    messages:
+      description: When will the training take place?
   - id: trainers
-    label: Trainers
-    type: '@user[]'
+    type: "@user[]"
+    attributes:
+      options-query: roles contains ROLE_TRAINER
+  - id: location
+    type: fieldset
+    fields:
+    - id: street
+      type: string
+    - id: zipCode
+      type: string
+    - id: city
+      type: string
+  - id: registrationFee
+    type: currency(EUR)
     validators:
     - required
-  - id: morning-programme
-    type: slot
+  - id: discount
+    type: percentage(100)
     validators:
     - required
-  - id: afternoon-programme
-    type: slot
-    validators:
-    - required
-  - id: participation-price
-    type: currency(EUR,2)
-    validators:
-    - required
+  - id: maximumNumberOfParticipants
+    type: number
+  - id: registrationPossible
+    label: Participants can register
+    type: boolean
+    messages:
+      tooltip: Users will be allowed to register via the frontend when checked.
+  - id: schedule
+    label: Schedule details
+    type: fieldset
+    fields:
+    - id: morning
+      label: Morning schedule
+      type: schedule-entry
+    - id: afternoon
+      label: Afternoon schedule
+      type: schedule-entry

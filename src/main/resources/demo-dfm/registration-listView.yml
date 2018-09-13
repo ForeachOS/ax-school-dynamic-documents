@@ -2,11 +2,17 @@ view-definition:
   name: custom-view
   type: list
   properties:
-    #TODO: correct fields
   - "documentName"
   - "versionLabel"
   - "field:email"
   - "field:training"
-  - "field:training.date"
+  #- "field:training.date"
   - "field:status"
   - "document.createdDate"
+  filter:
+    mode:
+      advanced: true
+    fields:
+    - id: documentName
+    - id: 'field:status'
+    - id: 'field:email'

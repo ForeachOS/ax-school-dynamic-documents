@@ -1,38 +1,47 @@
 - documentName: 'Across School: Dynamic Forms Module (basic)'
   fields:
-    call-to-action: 'From n00b to basic development with Dynamic Forms Module'
-    date: '2018-09-28'
+    tag-line: 'From n00b to basic development with Dynamic Forms Module'
+    date: '2018-09-13'
     location:
-      street-nr: 130
       street: Sint-Bartholomeusstraat
-      zipcode: 2170
-    morning-programme:
-      programme: 'DataSet, Definitions and Documents'
-      end-time: '08:00:00'
-      start-time: '12:00:00'
-    afternoon-programme:
-      programme: 'Customizing list views, importing data'
-      end-time: '13:00:00'
-      start-time: '17:00:00'
-    participation-price: 19.99
+      zipCode: 2170
+      city: Merksem
+    schedule:
+      morning:
+        details: 'DataSet, Definitions and Documents'
+        endTime: '08:00:00'
+        startTime: '12:00:00'
+      afternoon:
+        details: 'Customizing list views, importing data'
+        endTime: '13:00:00'
+        startTime: '17:00:00'
+    maximumNumberOfParticipants: 30
+    registrationFee: 19.99
+    registrationPossible: true
+    discount: 0.05
     trainers:
-    - 2
+    - -1
 - documentName: 'Across School: Dynamic Forms Module (advanced)'
   fields:
-    call-to-action: 'Become a wizard and learn the ins and outs of the Dynamic Forms Module'
+    tag-line: 'Become a wizard and learn the ins and outs of the Dynamic Forms Module'
     date: '2018-10-22'
     location:
-      street-nr: 130
       street: Sint-Bartholomeusstraat
-      zipcode: 2170
-    morning-programme:
-      programme: 'DataSet, Definitions and Documents with ACL'
-      end-time: '08:00:00'
-      start-time: '12:00:00'
-    afternoon-programme:
-      programme: 'DynamicDocumentWorkspace customizaitons'
-      end-time: '13:00:00'
-      start-time: '17:00:00'
-    participation-price: 29.99
+      zipCode: 2170
+      city: Merksem
+    schedule:
+      morning:
+        details: 'DataSet, Definitions and Documents with ACL'
+        endTime: '08:00:00'
+        startTime: '12:00:00'
+      afternoon:
+        details: 'DynamicDocumentWorkspace customizaitons'
+        endTime: '13:00:00'
+        startTime: '17:00:00'
+    maximumNumberOfParticipants: 10
+    registrationFee: 29.99
+    registrationPossible: false
+    discount: 0.20
     trainers:
-    - 2
+    - -1
+    - -2

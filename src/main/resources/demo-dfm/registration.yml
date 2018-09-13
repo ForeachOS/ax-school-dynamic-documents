@@ -1,32 +1,27 @@
 document-definition:
-  name: registration
+  name: Registration
   content:
   - id: training
-    label: Register to training
-    type: 'document(demodfm:training)'
+    type: document(demodfm:training)
     validators:
     - required
   - id: email
-    label: Your email address
     type: string
     validators:
     - required
-    - email
   - id: status
-    label: Registration status
     type: string
     possible-values:
-    # TODO: arne supplies correct values
-    - Requested
-    - Awaiting payment
-    - Confirmed
-    validators:
-    - required
-  - id: has-paid
-    type: boolean
-  - id: reduction
-    type: percentage(100)
-  - id: priceToPay
+    - requested
+    - awaiting-payment
+    - confirmed
+  - id: originalPrice
     type: currency(EUR)
-    formula: $(training.participation-price) * (1 - $(reduction))
-
+    formula: "$(training.registrationFee)"
+  - id: discount
+    type: percentage(100)
+    formula: "$(training.discount)"
+  - id: actualPrice
+    label: Your personal price
+    type: currency(EUR)
+    formula: "$(originalPrice) * (1 - $(discount))"
