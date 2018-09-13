@@ -1,6 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Thank you page</title>
+    <title>About page</title>
 </head>
 <body th:fragment="content">
 
@@ -11,18 +11,26 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="page-heading">
-                    <h1>Thank you!</h1>
+                    <h1>Register</h1>
                     <hr class="small">
-                    <span class="subheading"></span>
+                    <span class="subheading">Register for a training.</span>
                 </div>
             </div>
         </div>
     </div>
 </header>
+
 <!-- Main Content -->
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+            <form method="post" novalidate th:if="${formContent}" th:object="${document}">
+                <across:view element="${formContent}"/>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+
+            <div th:unless="${formContent}">Thank you for your registration.</div>
         </div>
     </div>
 </div>

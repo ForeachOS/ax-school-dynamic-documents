@@ -1,4 +1,4 @@
-package com.foreach.demo.dfm.application.config;
+package com.foreach.demo.dfm.application.validation;
 
 import com.foreach.across.modules.dynamicforms.domain.definition.document.RawDocumentDefinition;
 import com.foreach.across.modules.dynamicforms.domain.definition.types.DynamicTypeDefinition;

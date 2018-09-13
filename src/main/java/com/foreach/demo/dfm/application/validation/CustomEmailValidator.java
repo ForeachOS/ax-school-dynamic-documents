@@ -1,4 +1,4 @@
-package com.foreach.demo.dfm.application.config;
+package com.foreach.demo.dfm.application.validation;
 
 import com.foreach.across.modules.dynamicforms.domain.document.data.DynamicDocumentFieldValue;
 import com.foreach.across.modules.dynamicforms.domain.document.validation.DynamicDocumentFieldValidator;

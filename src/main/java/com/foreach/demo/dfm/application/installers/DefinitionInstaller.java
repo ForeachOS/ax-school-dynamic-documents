@@ -31,7 +31,7 @@ import java.util.function.Consumer;
 @Slf4j
 @Order(1000)
 public class DefinitionInstaller {
-    public final static String DEMO_DATASET = "DemoDfm";
+    public final static String DEMO_DATASET = "Trainings";
     public final static String REGISTRATION_DEFINITION_NAME = "Registration";
     public final static String TRAINING_DEFINITION_NAME = "Training";
 

@@ -2,17 +2,18 @@ document-definition:
   name: Registration
   content:
   - id: training
-    type: document(demodfm:training)
+    type: document(trainings:training)
     validators:
     - required
   - id: email
     type: string
     validators:
     - required
+    - email
   - id: status
     type: string
     possible-values:
-    - requested
+    - requested: 'Registration requested'
     - awaiting-payment
     - confirmed
   - id: originalPrice

@@ -1,127 +1,80 @@
 package com.foreach.demo.dfm.application.web;
 
-import com.foreach.across.modules.bootstrapui.elements.BootstrapUiBuilders;
-import com.foreach.across.modules.bootstrapui.elements.Style;
-import com.foreach.across.modules.bootstrapui.elements.builder.FormViewElementBuilder;
 import com.foreach.across.modules.dynamicforms.domain.definition.DynamicDefinition;
-import com.foreach.across.modules.dynamicforms.domain.definition.DynamicDefinitionRepository;
-import com.foreach.across.modules.dynamicforms.domain.definition.QDynamicDefinition;
-import com.foreach.across.modules.dynamicforms.domain.definition.document.DynamicDocumentDefinition;
+import com.foreach.across.modules.dynamicforms.domain.definition.DynamicDefinitionId;
+import com.foreach.across.modules.dynamicforms.domain.definition.DynamicDefinitionService;
 import com.foreach.across.modules.dynamicforms.domain.document.DynamicDocument;
 import com.foreach.across.modules.dynamicforms.domain.document.DynamicDocumentService;
 import com.foreach.across.modules.dynamicforms.domain.document.DynamicDocumentWorkspace;
+import com.foreach.across.modules.dynamicforms.domain.document.data.DynamicDocumentData;
 import com.foreach.across.modules.entity.registry.properties.EntityPropertySelector;
 import com.foreach.across.modules.entity.views.EntityViewElementBuilderHelper;
 import com.foreach.across.modules.entity.views.ViewElementMode;
 import com.foreach.across.modules.entity.views.helpers.EntityViewElementBatch;
-import com.foreach.across.modules.web.ui.DefaultViewElementBuilderContext;
-import com.foreach.across.modules.web.ui.ViewElement;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.foreach.across.modules.web.ui.elements.ContainerViewElement;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @Controller
-public class RegistrationController
-{
-	@Autowired
-	private DynamicDefinitionRepository dynamicDefinitionRepository;
-	@Autowired
-	private EntityViewElementBuilderHelper builderHelper;
-	@Autowired
-	private DynamicDocumentService documentService;
+@RequestMapping("/register")
+@RequiredArgsConstructor
+public class RegistrationController {
+    private final DynamicDocumentService documentService;
+    private final DynamicDefinitionService definitionService;
+    private final EntityViewElementBuilderHelper builderHelper;
 
-	@ModelAttribute("dto")
-	DynamicDocumentWorkspace dynamicDocument( @RequestParam("document") DynamicDocument training ) {
-		DynamicDocumentWorkspace dto = null;
-		List<DynamicDefinition> dynamicDefinitions = dynamicDefinitionRepository.findAll(
-				QDynamicDefinition.dynamicDefinition.key.equalsIgnoreCase( "registration" ) );
-		if ( dynamicDefinitions.size() > 0 ) {
-			DynamicDefinition dynamicDefinition = dynamicDefinitions.get( 0 );
-			DynamicDocumentWorkspace trainingWorkspace = documentService.createDocumentWorkspace( training );
-			LocalDate date = trainingWorkspace.getFieldValue( "date", LocalDate.class );
-			long daysUntilTraining = LocalDate.now().until( date, ChronoUnit.DAYS );
+    @ModelAttribute("document")
+    DynamicDocumentWorkspace createDocument(@RequestParam DynamicDocument training) {
+        DynamicDefinition definition = definitionService.findDefinition(DynamicDefinitionId.fromString("trainings:registration"));
+        DynamicDocumentWorkspace document = documentService.createDocumentWorkspace(definition);
+        document.setDocumentName(UUID.randomUUID().toString());
+        document.setFieldValue("training", training);
+        document.setFieldValue("status", "requested");
+        document.updateCalculatedFields();
 
-			DynamicDocumentWorkspace workspace = documentService.createDocumentWorkspace( dynamicDefinition );
-			workspace.setCalculatedFieldsEnabled( true );
-			workspace.setDocumentName( UUID.randomUUID().toString() );
-			workspace.setFieldValue( "training", training );
-			workspace.setFieldValue( "status", "New" );
-			workspace.setFieldValue( "reduction", getReduction( daysUntilTraining ) );
-			workspace.getFieldValue( "priceToPay" );
-			dto = workspace;
-		}
-		return dto;
-	}
+        return document;
+    }
 
-	private BigDecimal getReduction( long daysLeft ) {
-		if ( daysLeft > 30 ) {
-			return new BigDecimal( 0.2, new MathContext( 2 ) );
-		}
-		if ( daysLeft > 20 ) {
-			return new BigDecimal( 0.15, new MathContext( 2 ) );
-		}
-		if ( daysLeft > 10 ) {
-			return new BigDecimal( 0.1, new MathContext( 2 ) );
-		}
-		return new BigDecimal( 0 );
-	}
+    @GetMapping
+    public String showForm(@ModelAttribute("document") DynamicDocumentWorkspace document, Model model) {
+        ContainerViewElement container = new ContainerViewElement();
 
-	@GetMapping("/register")
-	public String formGet( @ModelAttribute("dto") DynamicDocumentWorkspace dto, Model model ) {
-		return renderForm( dto, model );
-	}
+        DynamicDocumentData fields = document.getFields();
 
-	@PostMapping("/register")
-	public String formPost( @ModelAttribute("dto") DynamicDocumentWorkspace dto, BindingResult bindingResult, Model model ) {
-		dto.validate( bindingResult );
-		if ( bindingResult.hasErrors() ) {
-			return renderForm( dto, model );
-		}
-		dto.save();
-		return "th/demo/thankyou";
-	}
+        EntityViewElementBatch<Object> batch = builderHelper.createBatchForEntity(document);
+        batch.setPropertyRegistry(fields.getDocumentDefinition().getEntityPropertyRegistry());
+        batch.setEntity(fields);
+        batch.setViewElementMode(ViewElementMode.FORM_WRITE);
+        batch.setPropertySelector(EntityPropertySelector.of("*", "~status"));
 
-	private String renderForm( DynamicDocumentWorkspace dto, Model model ) {
-		Collection<ViewElement> writeControls = getViewElementsForEntity( dto, ViewElementMode.FORM_WRITE, "training", "email", "reduction", "priceToPay" );
+        Map<String, Object> builderHints = new HashMap<>();
+        builderHints.put("training", ViewElementMode.FORM_READ);
+        batch.setBuilderHints(builderHints);
 
-		FormViewElementBuilder formBuilder = BootstrapUiBuilders.form().post().noValidate().commandAttribute( "dto" )
-		                                                        .addAll( writeControls );
-		                                                       // .addAll( readControls );
-		formBuilder.add( BootstrapUiBuilders.button().submit().style( Style.PRIMARY ).text( "Submit" ) );
+        batch.build().values().forEach(container::addChild);
 
-		model.addAttribute( "dto", dto );
-		model.addAttribute( "dynamicForm", formBuilder.build( new DefaultViewElementBuilderContext() ) );
+        model.addAttribute("formContent", container);
 
-		return "th/demo/dynamicForm";
-	}
+        return "th/demo/register";
+    }
 
-	@SuppressWarnings("unchecked")
-	private Collection<ViewElement> getViewElementsForEntity( DynamicDocumentWorkspace dto, ViewElementMode viewElementMode, String... names ) {
-		DynamicDocumentDefinition dynamicDocumentDefinition = dto.getFields().getDocumentDefinition();
-		EntityViewElementBatch dtoBatch = builderHelper.createBatchForEntity( dto );
+    @PostMapping
+    public String saveRegistration(@Valid @ModelAttribute("document") DynamicDocumentWorkspace document, BindingResult errors, Model model) {
+        document.validate(errors);
+        if (!errors.hasErrors()) {
+            document.save();
+        } else {
+            return showForm(document, model);
+        }
 
-		dtoBatch.setViewElementMode( viewElementMode );
-		dtoBatch.setEntity( dto.getFields() );
-		dtoBatch.setPropertyRegistry( dynamicDocumentDefinition.getEntityPropertyRegistry() );
-
-		Map<String,Object> builderHints = new HashMap<>(  );
-		builderHints.put( "reduction", ViewElementMode.FORM_READ );
-		builderHints.put( "training", ViewElementMode.FORM_READ );
-		dtoBatch.setBuilderHints( builderHints );
-
-		dtoBatch.setPropertySelector( EntityPropertySelector.of( names ) );
-
-		return dtoBatch.build().values();
-	}
+        return "th/demo/register";
+    }
 }

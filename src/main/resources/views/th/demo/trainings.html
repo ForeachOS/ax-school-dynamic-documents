@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Training overview</title>
+</head>
+<body th:fragment="content">
+
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" th:style="${'background-image: url(' + #webapp.path('@static:/demo/img/about-bg.jpg') + ')'}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="page-heading">
+                    <h1>Training overview</h1>
+                    <hr class="small">
+                    <span class="subheading">Register for a training.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+            <div class="post-preview" th:each="training : ${trainings}">
+                <a th:href="@{/register(training=${training.document.id})}">
+                    <h2 class="post-title" th:text="${training.documentName}">
+                        Training name.
+                    </h2>
+                    <h3 class="post-subtitle" th:text="${training.getFieldValue('tag-line')}">
+                        Tag line for this training.
+                    </h3>
+                </a>
+                <p class="post-meta">Training given on <span
+                        th:text="${#temporals.format(training.getFieldValue('date'), 'MMMM dd, yyyy')}">September 24, 2014</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

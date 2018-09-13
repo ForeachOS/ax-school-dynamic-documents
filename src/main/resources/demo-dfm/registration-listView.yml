@@ -1,18 +1,16 @@
 view-definition:
-  name: custom-view
+  name: listView
   type: list
   properties:
-  - "documentName"
-  - "versionLabel"
   - "field:email"
   - "field:training"
-  #- "field:training.date"
   - "field:status"
   - "document.createdDate"
   filter:
     mode:
       advanced: true
+    defaultQuery: "field:status in ('requested', 'awaiting-payment')"
     fields:
-    - id: documentName
     - id: 'field:status'
+      selector: MULTI
     - id: 'field:email'
