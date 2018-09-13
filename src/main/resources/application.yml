@@ -1,0 +1,34 @@
+acrossHibernate:
+  create-unit-of-work-factory: true
+
+adminWebModule:
+  login:
+    rememberMe:
+      key: demo-changeme
+  root-path: /admin
+
+
+applicationInfo:
+  applicationId: demo
+  applicationName: Demo
+
+debugWebModule:
+  root-path: /debug
+  security:
+    password: demo-changeme
+
+logging:
+  request-response:
+    enabled: true
+
+userModule:
+  require-email-unique: true
+
+spring:
+  devtools:
+    livereload:
+      enabled: false
+    restart:
+      enabled: false
+acrossWebModule:
+  registerGlobalBuilderContext: true

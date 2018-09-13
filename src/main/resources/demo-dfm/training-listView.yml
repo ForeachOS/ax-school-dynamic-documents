@@ -1,0 +1,9 @@
+view-definition:
+  name: custom-view
+  type: list
+  properties:
+  #TODO: correct fields
+  - "documentName"
+  - "field:date"
+  - "field:participation-price"
+

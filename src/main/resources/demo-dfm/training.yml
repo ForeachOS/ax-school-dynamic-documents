@@ -1,0 +1,70 @@
+document-definition:
+  name: training
+  types:
+  - id: slot
+    base-type: fieldset
+    fields:
+    - id: programme
+      type: text
+      validators:
+      - required
+    - id: start-time
+      label: Start time
+      type: time
+      validators:
+      - required
+    - id: end-time
+      label: End time
+      type: time
+      validators:
+      - required
+  - id: address
+    base-type: fieldset
+    fields:
+    - id: street
+      type: string
+      validators:
+      - required
+    - id: street-nr
+      type: number
+      validators:
+      - required
+    - id: zipcode
+      type: number
+      validators:
+      - required
+  content:
+  - id: call-to-action
+    label: Call to action
+    messages:
+      description: "The call to action for this demo"
+    type: string
+    validators:
+    - required
+  - id: date
+    label: Training date
+    type: date
+    validators:
+    - required
+  - id: location
+    label: Training location
+    type: address
+    validators:
+    - required
+  - id: trainers
+    label: Trainers
+    type: '@user[]'
+    validators:
+    - required
+  - id: morning-programme
+    type: slot
+    validators:
+    - required
+  - id: afternoon-programme
+    type: slot
+    validators:
+    - required
+  - id: participation-price
+    type: currency(EUR,2)
+    validators:
+    - required

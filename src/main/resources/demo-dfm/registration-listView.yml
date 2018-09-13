@@ -1,0 +1,12 @@
+view-definition:
+  name: custom-view
+  type: list
+  properties:
+    #TODO: correct fields
+  - "documentName"
+  - "versionLabel"
+  - "field:email"
+  - "field:training"
+  - "field:training.date"
+  - "field:status"
+  - "document.createdDate"

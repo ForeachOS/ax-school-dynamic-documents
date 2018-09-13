@@ -1,0 +1,38 @@
+- documentName: 'Across School: Dynamic Forms Module (basic)'
+  fields:
+    call-to-action: 'From n00b to basic development with Dynamic Forms Module'
+    date: '2018-09-28'
+    location:
+      street-nr: 130
+      street: Sint-Bartholomeusstraat
+      zipcode: 2170
+    morning-programme:
+      programme: 'DataSet, Definitions and Documents'
+      end-time: '08:00:00'
+      start-time: '12:00:00'
+    afternoon-programme:
+      programme: 'Customizing list views, importing data'
+      end-time: '13:00:00'
+      start-time: '17:00:00'
+    participation-price: 19.99
+    trainers:
+    - 2
+- documentName: 'Across School: Dynamic Forms Module (advanced)'
+  fields:
+    call-to-action: 'Become a wizard and learn the ins and outs of the Dynamic Forms Module'
+    date: '2018-10-22'
+    location:
+      street-nr: 130
+      street: Sint-Bartholomeusstraat
+      zipcode: 2170
+    morning-programme:
+      programme: 'DataSet, Definitions and Documents with ACL'
+      end-time: '08:00:00'
+      start-time: '12:00:00'
+    afternoon-programme:
+      programme: 'DynamicDocumentWorkspace customizaitons'
+      end-time: '13:00:00'
+      start-time: '17:00:00'
+    participation-price: 29.99
+    trainers:
+    - 2
