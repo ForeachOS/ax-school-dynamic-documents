@@ -23,7 +23,7 @@ import java.util.Map;
 @Installer(name = "document-importer", description = "Creates the initial documents", phase = InstallerPhase.AfterContextBootstrap, version = 1)
 @Slf4j
 @Order(2000)
-public class DocumentImporter
+public class DocumentsInstaller
 {
 	private final DynamicDocumentService documentService;
 	private final DynamicDefinitionService definitionService;

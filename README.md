@@ -1,4 +1,33 @@
-# Demo application
+# Dynamic documents for developers - Basic
+
+Welcome to the sample project for **Dynamic documents for developers**.
+This repository contains the project build during the basic training, serving as a reference guide for building applications with [`DynamicFormsModule`](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/index.html).
+The base of the application was generated using [Across Initializr](http://start-across.foreach.be/).
+
+In this project, a web application has been developed for a company that offers trainings to a broad public. 
+Visitors of the site can register for a training, which can then be further processed through the back office.
+
+# Content
+
+Within this project, you'll find sample code for the following subjects:
+
+* Sample [definitions](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/definitions/creating-a-document-definition.html) for a `Training` and `Registration` document
+  * Includes use of various [field types](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/field-types/index.html)
+  * Including corresponding [`view`](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/definitions/creating-a-view-definition.html) definitions to customize the list view
+* [Controller for a frontend](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/guides/general/creating-a-simple-frontend-form.html) registration page
+  * Renders a form on the `Registration` definition
+  * Supports the creation of `Registration` documents when the form is submitted
+  * Validation of the submitted form 
+
+# Extras
+
+Aside of the aforementioned content that was presented during the training itself, it also contains the following extras:
+
+* A `DefinitionInstaller` to create a sample data set and [import the aforementioned definitions](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/import-export/importing-definitions.html)
+* A [custom field validator](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/validators/creating-a-field-validator.html) that supports the validation of email addresses
+* A `DocumentsInstaller` to [import sample documents](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/import-export/importing-documents.html) for the `Training` definition  
+
+# The project
 
 ## Starting the website on your local machine
 Just start `DemoApplication` with the *dev* profile and keep it running.
