@@ -7,7 +7,7 @@ The base of the application was generated using [Across Initializr](http://start
 In this project, a web application has been developed for a company that offers trainings to a broad public. 
 Visitors of the site can register for a training, which can then be further processed through the back office.
 
-# Content
+## Content
 
 Within this project, you'll find sample code for the following subjects:
 
@@ -19,7 +19,7 @@ Within this project, you'll find sample code for the following subjects:
   * Supports the creation of `Registration` documents when the form is submitted
   * Validation of the submitted form 
 
-# Extras
+## Extras
 
 Aside of the aforementioned content that was presented during the training itself, it also contains the following extras:
 
@@ -27,7 +27,7 @@ Aside of the aforementioned content that was presented during the training itsel
 * A [custom field validator](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/validators/creating-a-field-validator.html) that supports the validation of email addresses
 * A `DocumentsInstaller` to [import sample documents](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/import-export/importing-documents.html) for the `Training` definition  
 
-# The project
+# General project information
 
 ## Starting the website on your local machine
 Just start `DemoApplication` with the *dev* profile and keep it running.
