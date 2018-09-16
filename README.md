@@ -1,6 +1,6 @@
-# Dynamic documents for developers - Basic
+# Dynamic documents for developers - basic training
 
-Welcome to the sample project for **Dynamic documents for developers**.
+Welcome to the sample project for **Dynamic documents for developers - basic training**.
 This repository contains the project build during the basic training, serving as a reference guide for building applications with [`DynamicFormsModule`](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/index.html).
 The base of the application was generated using [Across Initializr](http://start-across.foreach.be/).
 
@@ -21,7 +21,7 @@ Within this project, you'll find sample code for the following subjects:
 
 ## Extras
 
-Aside of the aforementioned content that was presented during the training itself, it also contains the following extras:
+Aside of the content that was presented during the training itself, it also contains the following extras:
 
 * A `DefinitionInstaller` to create a sample data set and [import the aforementioned definitions](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/import-export/importing-definitions.html)
 * A [custom field validator](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/validators/creating-a-field-validator.html) that supports the validation of email addresses
