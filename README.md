@@ -15,7 +15,7 @@ Within this project, you'll find sample code for the following subjects:
   * Includes use of various [field types](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/field-types/index.html)
   * Including corresponding [`view`](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/definitions/creating-a-view-definition.html) definitions to customize the list view
 * [Controller for a frontend](https://across-docs.foreach.be/across-site/production/dynamic-forms-module/0.0.1/guides/general/creating-a-simple-frontend-form.html) registration page
-  * Renders a form on the `Registration` definition
+  * Renders a form based on the `Registration` definition
   * Supports the creation of `Registration` documents when the form is submitted
   * Validation of the submitted form 
 
